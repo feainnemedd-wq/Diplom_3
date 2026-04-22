@@ -5,16 +5,28 @@ from page_objects.feed_page import FeedPage
 
 class TestMainPage:
 
-    @allure.title('Проверка перехода по клику на "Конструктор"')
+    @allure.title('Проверка перехода в "Ленту заказов" по клику в хедере')
+    def test_navigate_to_order_feed_success(self, driver):
+        main_page = MainPage(driver)
+        feed_page = FeedPage(driver)
+        
+        # Переходим в ленту заказов
+        main_page.click_header_feed_button()
+        
+        # Проверяем, что перешли
+        assert feed_page.get_text_on_title_of_orders_list() == "Лента заказов"
+
+    @allure.title('Проверка перехода в "Конструктор" из ленты заказов')
     def test_navigate_to_constructor_success(self, driver):
         main_page = MainPage(driver)
         feed_page = FeedPage(driver)
         
+        # Сначала переходим в ленту, чтобы оказаться не на главной
         main_page.click_header_feed_button()
-        # Проверяем, что перешли в ленту заказов
-        assert feed_page.get_text_on_title_of_orders_list() == "Лента заказов"
         
+        # Кликаем на "Конструктор"
         main_page.click_on_button_constructor()
+        
         # Проверяем возврат на главную (Конструктор)
         assert main_page.get_text_on_title_of_constructor() == "Соберите бургер"
 
