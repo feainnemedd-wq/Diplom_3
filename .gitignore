@@ -1,0 +1,15 @@
+# Python (кэш и временные файлы)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Отчеты Allure (результаты тестов)
+allure-results*/
+
+# Окружение и зависимости
+venv/
+.env
+
+# Логи и системные файлы
+*.log
+.DS_Store
